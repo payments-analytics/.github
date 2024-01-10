@@ -17,6 +17,6 @@ A missão do nosso repositório é centralizar todas as queries de análise de r
 Para falar conosco, nossas portas (virtuais) estão sempre abertas:
 
 - 📧 E-mail [Duda](mailto:maria.mota@stone.com.br) | [Picotti](mailto:matheus.picotti@stone.com.br)
-- 💬 [Slack](https://stonepgto.slack.com/team/U063SSKP4J3)
+- 💬 Slack  [Duda](https://stonepgto.slack.com/team/U063SSKP4J3) | [Picotti](https://stonepgto.slack.com/team/U0684GLJL12)
 
 Estamos ansiosos para ouvir suas ideias e feedback!
