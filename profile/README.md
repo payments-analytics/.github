@@ -11,6 +11,8 @@ A missão do nosso repositório é centralizar todas as queries de análise de r
   - 📈 Queries para dashboards do Looker Studio.
 - **[pay-gestao-negocio-scheduled-queries](https://github.com/payments-analytics/pay-gestao-negocio-scheduled-queries)**
   - 🗓 Queries agendadas do Dataset `payments_analytics` no BigQuery.
+- **[pay-gestao-scripts](https://github.com/payments-analytics/pay-gestao-scripts)**
+  - 📜 Scripts para o dia a dia do time.
 
 ## 📬 Contato
 
