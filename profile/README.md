@@ -1,7 +1,10 @@
 # 🌟 Bem-vindo à Payments Analytics! 🌟
 
+
 ## 💡 Sobre
 A missão do nosso repositório é centralizar todas as queries de análise de resultados que utilizamos no BigQuery e RedShift. Nosso objetivo é criar um catálogo abrangente de informações e queries prontas, especificamente voltadas a payments.
+
+![image](https://github.com/payments-analytics/.github/assets/154369193/1bac58eb-51c7-41e3-9d67-041031b6fdd0)
 
 ## 🚀 Nossos Projetos
 
