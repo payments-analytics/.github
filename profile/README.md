@@ -22,6 +22,7 @@ Este guia é focado em ilustrar como realizar consultas fundamentais e identific
 ### Índice Payments Analytics 
   - [RAV](####1.RAV)
   - [Boleto](####2.Boleto)
+  - [Pix](#pix-pos)
   - [DCC](#dcc)
   - [GMV](#gmv)
   - [Link](#link)
@@ -82,10 +83,49 @@ GROUP BY
 |**Marca**|**Descrição da Tabela**   | **Colunas**      | **Dimensões** |
 |---------|-------------|-----------------|--------------|
 | Stone| Resultado boleto stone por mês: `payments_analytics.boleto_monthly_results` | • Soma dos valores recebidos de boletos emitidos na conta Stone e liquidados: `gmv` <br> <br> • Contagem de boletos emitidos na conta Stone que foram liquidados: `transactions` <br> <br> • Contagem de boletos emitidos na conta Stone (pagos ou não): `issued_boleto` | • **Mês:** `reference_month` |
-| Stone | Resultado boleto stone por mês e Tier: `payments_analytics.boleto_tiered_monthly_results` |  • Soma dos valores recebidos de boletos emitidos na conta Stone e liquidados: `gmv` <br> <br> • Contagem de boletos emitidos na conta Stone que foram liquidados: `transactions` <br> <br> • Contagem de boletos emitidos na conta Stone (pagos ou não): `issued_boleto` | • **Mês:** `reference_month` <br> <br> • **Tier:** `tier_tpv` |
+| Stone | Resultado boleto stone por mês: `payments_analytics.boleto_tiered_monthly_results` |  • Soma dos valores recebidos de boletos emitidos na conta Stone e liquidados: `gmv` <br> <br> • Contagem de boletos emitidos na conta Stone que foram liquidados: `transactions` <br> <br> • Contagem de boletos emitidos na conta Stone (pagos ou não): `issued_boleto` | • **Mês:** `reference_month` |
 | Pagarme | Resultado receita pagarme por dia : `payments_analytics.pagarme_revenue_daily_results` | • Receita boleto refund: `receita_boleto_refund` <br> <br> • Receita boleto: `receita_boleto` |• **Dia:** `date_ref`|
 | Pagarme | Resultado receita pagarme por Mês : `payments_analytics.pagarme_revenue_daily_results` | • Receita boleto refund: `receita_boleto_refund` <br> <br> • Receita boleto: `receita_boleto` |• **Mês:** `mes_ref`|
-| Pagarme | Resultado GMV por Mês : `payments_analytics.payments_gmv_monthly_results` | • Net TPV Boleto PSP SMB: `Boleto_PSP_SMB` <br> <br> • Net TPV Boleto PSP KA: `Boleto_PSP_KA` <br> <br> • Net TPV Boleto GTW SMB: `Boleto_Gtw_SMB` <br> <br> • Net TPV Boleto GTW KA: `Boleto_Gtw_KA` <br> <br> •Soma dos valores recebidos de boletos emitidos na conta Stone e liquidados: `Boleto_Stone`|• **Mês:** `mes_ref`|
+| Pagarme e Stone | Resultado GMV por Mês : `payments_analytics.payments_gmv_monthly_results` | • Net TPV Boleto PSP SMB: `Boleto_PSP_SMB` <br> <br> • Net TPV Boleto PSP KA: `Boleto_PSP_KA` <br> <br> • Net TPV Boleto GTW SMB: `Boleto_Gtw_SMB` <br> <br> • Net TPV Boleto GTW KA: `Boleto_Gtw_KA` <br> <br> •Soma dos valores recebidos de boletos emitidos na conta Stone e liquidados: `Boleto_Stone`| • **Mês:** `mes`|
+| Stone | Resultado de receita payments: `payments_analytics.payments_net_cof_revenue` | • Receita gerada pela cobrança de tarifa sobre boletos emitidos na conta Stone e liquidados (R$): `stone_boleto_banking_revenue` | • **Mês:** `reference_month` |
+
+#### :bulb: 2.1 Casos de uso
+- Analisar a eficiência na conversão de boletos emitidos em boletos liquidados por mês:
+``` sql
+SELECT
+  reference_month
+  , SUM (transactions)/ SUM(issued_boleto) AS taxa_conversao
+FROM dataplatform-prd.payments_analytics.boleto_tiered_monthly_results
+GROUP BY 1
+```
+- Analisar a variação de boletos emitidos em 2022 vs 2023 (mês a mês) :
+``` sql
+SELECT
+    EXTRACT(MONTH FROM reference_month) AS month
+    , SUM(CASE WHEN EXTRACT(YEAR FROM reference_month) = 2022 THEN issued_boleto ELSE 0 END) AS issued_boleto_2022
+    , SUM(CASE WHEN EXTRACT(YEAR FROM reference_month) = 2023 THEN issued_boleto ELSE 0 END) AS issued_boleto_2023
+FROM dataplatform-prd.payments_analytics.boleto_tiered_monthly_results
+WHERE 1=1
+  AND EXTRACT(YEAR FROM reference_month) IN (2022, 2023)
+GROUP BY 1
+ORDER BY 1
+```
+- Analisar o net tpv de boletos PSP e Gateway:
+``` sql
+SELECT
+    mes
+    , SUM(Boleto_PSP_SMB) + SUM(Boleto_PSP_KA) AS boleto_psp
+    , SUM(Boleto_Gtw_SMB) + SUM(Boleto_Gtw_KA) AS boleto_gtw
+FROM dataplatform-prd.payments_analytics.payments_gmv_monthly_results
+GROUP BY 1
+ORDER BY 1;
+```
+#### 3.Pix
+|**Marca**|**Descrição da Tabela**|**Colunas**|**Dimensões**|
+|---------|-----------------------|-----------|-------------|
+|Pagarme | Resultado receita pagarme por dia: `payments_analytics.pagarme_revenue_daily_results` | • Receita Pix: `receita_pix` | • **Dia:** `date_ref` |
+|Pagarme | Resultado receita pagarme por mês: `payments_analytics.pagarme_revenue_daily_results` | • Receita Pix: `receita_pix` | • **Mês:** `mes_ref` |
+|Stone e Ton| Resultado GMV:`payments_analytics.payments_gmv_monthly_results` |• PIX recebido Stone: `Pix_POS_Stone` <br><br> • PIX recebido Ton:`Pix_POS_Ton` <br><br> • PIX recebido Pagarme SMB: `Pix_Pagarme_SMB` <br><br> • PIX recebido Pagarme KA: `Pix_Pagarme_KA` | • **Mês:** `mes` |
 
 ## :mailbox_with_mail: Contato
 
