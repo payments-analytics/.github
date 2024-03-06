@@ -22,10 +22,10 @@ Este guia é focado em ilustrar como realizar consultas fundamentais e identific
 ### Índice Payments Analytics 
   - [RAV](####1.RAV)
   - [Boleto](####2.Boleto)
-  - [Pix](#pix-pos)
+  - [Pix](####3.Pix)
+  - [Link](#link)
   - [DCC](#dcc)
   - [GMV](#gmv)
-  - [Link](#link)
   - [Parcelamento](#parcelamento)
   - [Pix Pos](#pix-pos)
   - [Receita](#receita)
@@ -125,7 +125,37 @@ ORDER BY 1;
 |---------|-----------------------|-----------|-------------|
 |Pagarme | Resultado receita pagarme por dia: `payments_analytics.pagarme_revenue_daily_results` | • Receita Pix: `receita_pix` | • **Dia:** `date_ref` |
 |Pagarme | Resultado receita pagarme por mês: `payments_analytics.pagarme_revenue_daily_results` | • Receita Pix: `receita_pix` | • **Mês:** `mes_ref` |
-|Stone e Ton| Resultado GMV:`payments_analytics.payments_gmv_monthly_results` |• PIX recebido Stone: `Pix_POS_Stone` <br><br> • PIX recebido Ton:`Pix_POS_Ton` <br><br> • PIX recebido Pagarme SMB: `Pix_Pagarme_SMB` <br><br> • PIX recebido Pagarme KA: `Pix_Pagarme_KA` | • **Mês:** `mes` |
+|Stone, Ton e Pagarme| Resultado GMV:`payments_analytics.payments_gmv_monthly_results` | • PIX recebido Stone: `Pix_POS_Stone` <br><br> • PIX recebido Ton:`Pix_POS_Ton` <br><br> • PIX recebido Pagarme SMB: `Pix_Pagarme_SMB` <br><br> • PIX recebido Pagarme KA: `Pix_Pagarme_KA` | • **Mês:** `mes` |
+|Stone e Ton| Resultado receita payments por mês: `payments_analytics.payments_net_cof_revenue`| • Receita Pix Stone: `stone_pix_pos_revenue` <br><br> • Receita Pix Ton: `ton_pix_pos_revenue`|  • **Mês:** `reference_month` |
+|Stone| Resultado pix stone por mês: `payments_analytics.pix_pos_stone_monthly_results`| • Volume de transações via pix QR Code dinâmico gerado no POS : `pix_in_dynamic_pos_trx` <br><br> • Valor total das transações via pix QR Code dinâmico gerado no POS: `pix_in_dynamic_pos_tpv` <br><br> • Receita de taxas de transações via pix QR Code dinâmico gerado no POS: `pix_in_dynamic_pos_revenue` <br><br> • Contagem de transações que entraram na conta através de pix via QR Code estático: `pix_in_dynamic_pos_charged_trx`|  • **Mês:** `reference_month` |
+|Ton| Resultado pix ton por mês: `payments_analytics.pix_pos_stone_monthly_results`| • Volume de transações via pix QR Code dinâmico gerado no POS : `pix_in_dynamic_pos_trx` <br><br> • Valor total das transações via pix QR Code dinâmico gerado no POS: `pix_in_dynamic_pos_tpv` <br><br> • Receita de taxas de transações via pix QR Code dinâmico gerado no POS: `pix_in_dynamic_pos_revenue` <br><br> • Contagem de transações que entraram na conta através de pix via QR Code estático: `pix_in_dynamic_pos_charged_trx`|  • **Mês:** `reference_month` |
+
+#### :bulb: 3.1 Casos de uso
+- Analisar o valor de receita pix de Stone e Ton:
+``` sql
+SELECT
+    reference_month
+    , SUM(stone_pix_pos_revenue) AS receita_pix_stone
+    , SUM(ton_pix_pos_revenue) AS receita_pix_ton
+FROM dataplatform-prd.payments_analytics.payments_net_cof_revenue
+GROUP BY 1
+```
+- Analisar Os valores das transações e volume das transações:
+``` sql
+SELECT
+    reference_month
+    , SUM(pix_in_dynamic_pos_trx) AS qtd_transacoes_pix
+    , SUM(pix_in_dynamic_pos_tpv) AS valor_transacoes_pix
+FROM dataplatform-prd.payments_analytics.pix_pos_stone_monthly_results
+GROUP BY 1
+```
+
+#### 4.Link
+|**Marca**|**Descrição da Tabela**|**Colunas**|**Dimensões**|
+|---------|-----------------------|-----------|-------------|
+|Stone| Resultado de link stone: `payments_analytics.payment_link_stone_monthly_results` | • Base Ativa Link: `active_clients` <br><br> • Valor total das transações link: `tpv` <br><br> • Receita Net Cof: `receita_net_cof`| • **Mês:** `reference_month` |
+|Ton| Resultado de link stone: `payments_analytics.payment_link_stone_monthly_results` | • Base Ativa Link: `active_clients` <br><br> • Valor total das transações link: `tpv` <br><br> • Receita Net Cof: `receita_net_cof`| • **Mês:** `reference_month` |
+
 
 ## :mailbox_with_mail: Contato
 
