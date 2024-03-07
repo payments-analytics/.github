@@ -19,7 +19,7 @@ A missão do nosso repositório é centralizar todas as queries de análise de r
 
 ## :compass: Guia de Análise  
 Este guia é focado em ilustrar como realizar consultas fundamentais e identificar as tabelas chave no dataset de pagamentos para uma análise dos produtos. Vamos explorar as principais tabelas e como utilizá-las em consultas estratégicas para obter insights.
-### Índice Payments Analytics 
+### Índice Payments Analytics - Produtos
   - [RAV](####1.RAV)
   - [Boleto](####2.Boleto)
   - [Pix](####3.Pix)
@@ -30,7 +30,7 @@ Este guia é focado em ilustrar como realizar consultas fundamentais e identific
 
 
 #### 1.RAV
-|**Marca**|**Descrição da Tabela**   | **Colunas**      | **Dimensões** |
+|**Marca**|**Descrição da Tabela**| **Colunas**| **Dimensões** |
 |---------|-------------|-----------------|------------------|
 |Pagarme|Receita diária pagarme: `payments_analytics.pagarme_revenue_daily_results`| • Receita líquida de RAV: `receita_rav_liquida` | • **Dia:** `date_ref` <br> • **Operacao:** PAGARME - SMB e PAGARME - GRANDES CONTAS|
 |Pagarme|Receita mensal pagarme: `payments_analytics.pagarme_revenue_results`|• Receita líquida de RAV: `receita_rav_liquida`| • **Mês:** `mes_ref` <br> • **Operacao:** PAGARME - SMB e PAGARME - GRANDES CONTAS|
@@ -74,7 +74,7 @@ GROUP BY
 ```
 
 #### 2.Boleto
-|**Marca**|**Descrição da Tabela**   | **Colunas**      | **Dimensões** |
+|**Marca**|**Descrição da Tabela**| **Colunas**| **Dimensões** |
 |---------|-------------|-----------------|--------------|
 | Stone| Resultado boleto stone por mês: `payments_analytics.boleto_monthly_results` | • Soma dos valores recebidos de boletos emitidos na conta Stone e liquidados: `gmv` <br> <br> • Contagem de boletos emitidos na conta Stone que foram liquidados: `transactions` <br> <br> • Contagem de boletos emitidos na conta Stone (pagos ou não): `issued_boleto` | • **Mês:** `reference_month` |
 | Stone | Resultado boleto stone por mês: `payments_analytics.boleto_tiered_monthly_results` |  • Soma dos valores recebidos de boletos emitidos na conta Stone e liquidados: `gmv` <br> <br> • Contagem de boletos emitidos na conta Stone que foram liquidados: `transactions` <br> <br> • Contagem de boletos emitidos na conta Stone (pagos ou não): `issued_boleto` | • **Mês:** `reference_month` |
@@ -201,7 +201,7 @@ GROUP BY 1
 |Stone, Ton e Pagarme| Resultado de receita por mês: `payments_analytics.payments_net_cof_revenue_monthly_results` | • Receita de Adesão Stone: `stone_adesao_net_revenue` <br><br> • Receita de Adesão Ton: `ton_adesao_net_revenue` <br><br> • Receita de Adesão Partner Program: `partner_program_adesao_net_revenue` |• **Mês:** `reference_month`|
 
 #### :bulb: 7.1 Casos de uso
--- Analisar receita de adesão partner program:
+- Analisar receita de adesão partner program:
 ``` sql
 SELECT
   reference_month
@@ -209,6 +209,61 @@ SELECT
 FROM dataplatform-prd.payments_analytics.payments_net_cof_revenue_monthly_results
 GROUP BY 1
 ```
+### Índice Payments Analytics - Budget 2024
+- Base Ativa:
+[`dataplatform-prd.payments_analytics.test_budget_base_ativa_payments`](https://github.com/stone-payments/payments-analytics/blob/main/pay-gestao-negocio-scheduled-queries/budget-2024/budget_base_ativa_payments.sql)
+
+| **Coluna** | **Tipo**      | **Descrição**   |
+|--------------------|------------------------------------|----------------------------------------------|
+|• reference_month|`DATE` | 	Mês de referência do budget|
+|• company |`STRING` | Marca associada:<br> • *STONE* <br> • *PAGARME* <br> • *TON* |
+|• canal |`STRING` | Canal associado:<br> • *TODOS* <br> • *SUBADQUIRENTES* <br> • *MARKETPLACES* <br> • *PARTNER PROGRAM* <br> •	*KEY ACCOUNTS* <br> • *PAGARME SMB* |
+|• segmento |`STRING` | Segmento associado:<br> • *SMALL* <br> • *MICRO* <br> • *MEDIUM* <br> • *KA* <br> •	*DIGITAL_SMB* |
+|• budget_ba_30d |`FLOAT` | Budget de clientes ativos |
+|• budget_churn_30d |`FLOAT` | Budget de clientes churn |
+|• budget_returning_30d |`FLOAT` | Budget de clientes reativados |
+|• budget_new_actives_30d|`FLOAT` | Budget de novos ativos |
+
+- Receita:
+[`dataplatform-prd.payments_analytics.test_budget_receita_payments`](https://github.com/stone-payments/payments-analytics/blob/main/pay-gestao-negocio-scheduled-queries/budget-2024/budget_receita_payments.sql)
+
+| **Coluna** | **Tipo**      | **Descrição**   |
+|--------------------|------------------------------------|----------------------------------------------|
+|• reference_month|`DATE` | 	Mês de referência do budget|
+|• company |`STRING` | Marca associada:<br> • *STONE* <br> • *PAGARME* <br> • *TON* |
+|• canal |`STRING` | Canal associado:<br> • *TODOS* <br> • *SUBADQUIRENTES* <br> • *MARKETPLACES* <br> • *PARTNER PROGRAM* <br> •	*KEY ACCOUNTS* <br> • *PAGARME SMB* |
+|• segmento |`STRING` | Segmento associado:<br> • *SMALL* <br> • *MICRO* <br> • *MEDIUM* <br> • *KA* <br> •	*DIGITAL_SMB* |
+|• receita_mdr_liquida |`FLOAT` | Budget receita líquida MDR |
+|• receita_rav_liquida |`FLOAT` | Budget receita líquida RAV |
+|• receita_liquida_adesao |`FLOAT` | Budget receita líquida de adesão|
+|• receita_liquida_aluguel|`FLOAT` | Budget receita líquida de aluguel |
+|• receita_liquida_pix|`FLOAT` | Budget receita líquida de pix |
+|• receita_liquida_boleto|`FLOAT` | Budget receita líquida de boleto |
+|• receita_liquida_voucher|`FLOAT` | Budget receita líquida de voucher |
+|• receita_liquida_gateway|`FLOAT` | Budget receita líquida de gateway |
+|• receita_liquida_antifraude|`FLOAT` | Budget receita líquida de antifraude |
+|• receita_liquida_outras_receitas|`FLOAT` | Budget receita líquida outras receitas |
+
+- TPV:
+[`dataplatform-prd.payments_analytics.test_budget_tpv_payments`](https://github.com/stone-payments/payments-analytics/blob/main/pay-gestao-negocio-scheduled-queries/budget-2024/budget_tpv_payments.sql)
+
+| **Coluna** | **Tipo**      | **Descrição**   |
+|--------------------|------------------------------------|----------------------------------------------|
+|• reference_month|`DATE` | 	Mês de referência do budget|
+|• budget_tpv_cartao_stone_smb |`FLOAT` |Budget de tpv cartão **stone smb**|
+|• budget_tpv_cartao_stone_micro |`FLOAT` |Budget de tpv cartão **stone micro**|
+|• tpv_stone |`FLOAT` |Soma do tpv cartão **stone micro e smb**|
+|• budget_tpv_cartao_ton_smb |`FLOAT` |Budget de tpv cartão **ton smb**|
+|• budget_tpv_cartao_ton_micro |`FLOAT` |Budget de tpv cartão **ton micro**|
+|• tpv_ton |`FLOAT` |Soma do tpv cartão **ton micro e smb**|
+|• budget_tpv_cartao_pagarme_smb|`FLOAT` |Budget de tpv cartão **pagarme smb**|
+|• budget_tpv_cartao_pagarme_lacc |`FLOAT` |Budget de tpv cartão **pagarme lacc**|
+|• budget_tpv_cartao_pagarme_ka |`FLOAT` |Budget de tpv cartão **pagarme ka**|
+|• budget_tpv_cartao_pagarme_pp |`FLOAT` |Budget de tpv cartão **pagarme pp**|
+|• tpv_pagarme |`FLOAT` |Soma do tpv cartão **pagarme smb, lacc, ka e pp**|
+
+#### :bulb: [Consolidação Budget 2024](https://github.com/stone-payments/payments-analytics/blob/main/pay-gestao-negocio-analytics-queries/budget/budget_2024.sql)
+
 ## :mailbox_with_mail: Contato
 
 Para falar conosco, nossas portas (virtuais) estão sempre abertas:
