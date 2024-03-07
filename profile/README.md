@@ -23,17 +23,11 @@ Este guia é focado em ilustrar como realizar consultas fundamentais e identific
   - [RAV](####1.RAV)
   - [Boleto](####2.Boleto)
   - [Pix](####3.Pix)
-  - [Link](#link)
-  - [DCC](#dcc)
-  - [GMV](#gmv)
-  - [Parcelamento](#parcelamento)
-  - [Pix Pos](#pix-pos)
-  - [Receita](#receita)
-  - [Smart Pos](#smart-pos)
-  - [Tap on Phone](#tap-on-phone)
-  - [TPV](#tpv)
-  - [Whatsapp Pay](#whatsapp-pay)
-  - [Budget 2024](#budget-2024)
+  - [Link](####4.Link)
+  - [Tap on Phone](####5.Tap on Phone)
+  - [DCC](####6.DCC)
+  - [Adesão](####7.Adesão)
+
 
 #### 1.RAV
 |**Marca**|**Descrição da Tabela**   | **Colunas**      | **Dimensões** |
@@ -140,7 +134,7 @@ SELECT
 FROM dataplatform-prd.payments_analytics.payments_net_cof_revenue
 GROUP BY 1
 ```
-- Analisar Os valores das transações e volume das transações:
+- Analisar os valores das transações e o volume de transações:
 ``` sql
 SELECT
     reference_month
@@ -155,8 +149,66 @@ GROUP BY 1
 |---------|-----------------------|-----------|-------------|
 |Stone| Resultado de link stone: `payments_analytics.payment_link_stone_monthly_results` | • Base Ativa Link: `active_clients` <br><br> • Valor total das transações link: `tpv` <br><br> • Receita Net Cof: `receita_net_cof`| • **Mês:** `reference_month` |
 |Ton| Resultado de link stone: `payments_analytics.payment_link_stone_monthly_results` | • Base Ativa Link: `active_clients` <br><br> • Valor total das transações link: `tpv` <br><br> • Receita Net Cof: `receita_net_cof`| • **Mês:** `reference_month` |
+|Stone Ton| Resultado GMV: `payments_analytics.payments_gmv_monthly_results` | • TPV Link Ton: `TPV_Link_Ton` <br><br> • TPV Link Stone: `TPV_Link_Stone`| • **Mês:** `mes` |
 
+#### :bulb: 4.1 Casos de uso
+- Analisar os valores de TPV Link Ton e Stone:
+``` sql
+SELECT
+    mes
+    , SUM(TPV_Link_Ton) AS TPV_Link_Ton
+    , SUM(TPV_Link_Stone) AS TPV_Link_Stone
+FROM dataplatform-prd.payments_analytics.payments_gmv_monthly_results
+GROUP BY 1
+```
 
+#### 5.Tap on Phone
+|**Marca**|**Descrição da Tabela**|**Colunas**|**Dimensões**|
+|---------|-----------------------|-----------|-------------|
+|Tap on Phone|Resultado GMV: `payments_analytics.payments_gmv_monthly_results` | • TPV Tap on Phone: `TPV_Tap_Ton` | • **Mês:** `mes` |
+|Tap on Phone|Receita Payments: `payments_analytics.payments_net_cof_revenue_monthly_results` | • Receita Tap on Phone: `ton_tap_on_phone_revenue` | • **Mês:** `reference_month` |
+|Tap on Phone| Resultado Tap on Phone: `payments_analytics.tap_on_phone_ton_monthly_results`| • Base Ativa Tap on Phone: `active_clients` <br><br> • Valor total das transações Tap on Phone: `tpv` <br><br> • Receita Net Cof: `receita_net_cof` | • **Mês:** `reference_month` |
+
+#### :bulb: 5.1 Casos de uso
+- Analisar a base ativa de Tap on Phone:
+``` sql
+SELECT
+    reference_month
+    , SUM(active_clients) AS base_ativa_tap
+FROM dataplatform-prd.payments_analytics.tap_on_phone_ton_monthly_results
+GROUP BY 1
+```
+#### 6.DCC
+|**Marca**|**Descrição da Tabela**|**Colunas**|**Dimensões**|
+|---------|-----------------------|-----------|-------------|
+|Stone| Resultado Stone DCC: `payments_analytics.dcc_stone_monthly_results` | • Receita estimada: `estimated_revenue` |• **Mês:** `reference_month` |
+
+#### :bulb: 6.1 Casos de uso
+- Analisar receita DCC:
+``` sql
+SELECT
+    reference_month
+    , SUM(estimated_revenue) AS estimated_revenue
+FROM dataplatform-prd.payments_analytics.dcc_stone_monthly_results
+GROUP BY 1
+```
+
+#### 7.Adesão
+|**Marca**|**Descrição da Tabela**|**Colunas**|**Dimensões**|
+|---------|-----------------------|-----------|-------------|
+|Pagarme| Resultado de receita por dia: `payments_analytics.pagarme_revenue_daily_results` | • Receita de Adesão: `receita_adesao` |• **Dia:** `date_ref`|
+|Pagarme| Resultado de receita por mês: `payments_analytics.pagarme_revenue_daily_results` | • Receita de Adesão: `receita_adesao` |• **Mês:** `mes_ref`|
+|Stone, Ton e Pagarme| Resultado de receita por mês: `payments_analytics.payments_net_cof_revenue_monthly_results` | • Receita de Adesão Stone: `stone_adesao_net_revenue` <br><br> • Receita de Adesão Ton: `ton_adesao_net_revenue` <br><br> • Receita de Adesão Partner Program: `partner_program_adesao_net_revenue` |• **Mês:** `reference_month`|
+
+#### :bulb: 7.1 Casos de uso
+-- Analisar receita de adesão partner program:
+``` sql
+SELECT
+  reference_month
+  , SUM(partner_program_adesao_net_revenue) AS receita_adesao_partner_program
+FROM dataplatform-prd.payments_analytics.payments_net_cof_revenue_monthly_results
+GROUP BY 1
+```
 ## :mailbox_with_mail: Contato
 
 Para falar conosco, nossas portas (virtuais) estão sempre abertas:
