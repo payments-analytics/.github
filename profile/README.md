@@ -20,14 +20,6 @@ A missão do nosso repositório é centralizar todas as queries de análise de r
 ## :compass: Guia de Análise  
 Este guia é focado em ilustrar como realizar consultas fundamentais e identificar as tabelas chave no dataset de pagamentos para uma análise dos produtos. Vamos explorar as principais tabelas e como utilizá-las em consultas estratégicas para obter insights.
 ### Índice Payments Analytics - Produtos
-  - [RAV](1.RAV)
-  - [Boleto](2.Boleto)
-  - [Pix](3.Pix)
-  - [Link](4.Link)
-  - [Tap on Phone](5.TaponPhone)
-  - [DCC](6.DCC)
-  - [Adesão](7.Adesão)
-
 
 #### 1.RAV
 |**Marca**|**Descrição da Tabela**| **Colunas**| **Dimensões** |
