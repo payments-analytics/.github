@@ -19,7 +19,15 @@ A missão do nosso repositório é centralizar todas as queries de análise de r
 
 ## :compass: Guia de Análise  
 Este guia é focado em ilustrar como realizar consultas fundamentais e identificar as tabelas chave no dataset de pagamentos para uma análise dos produtos. Vamos explorar as principais tabelas e como utilizá-las em consultas estratégicas para obter insights.
-### Índice Payments Analytics - Produtos
+### Payments Analytics - Produtos
+  - [RAV](####1.RAV)
+  - [Boleto](####2.Boleto)
+  - [Pix](####3.Pix)
+  - [Link](####4.Link)
+  - [Tap on Phone](####5.Tap on Phone)
+  - [DCC](####6.DCC)
+  - [Adesão](####7.Adesão)
+
 
 #### 1.RAV
 |**Marca**|**Descrição da Tabela**| **Colunas**| **Dimensões** |
@@ -201,7 +209,7 @@ SELECT
 FROM dataplatform-prd.payments_analytics.payments_net_cof_revenue_monthly_results
 GROUP BY 1
 ```
-### Índice Payments Analytics - Budget 2024
+### Payments Analytics - Budget 2024
 - Base Ativa:
 [`dataplatform-prd.payments_analytics.test_budget_base_ativa_payments`](https://github.com/stone-payments/payments-analytics/blob/main/pay-gestao-negocio-scheduled-queries/budget-2024/budget_base_ativa_payments.sql)
 
@@ -255,6 +263,36 @@ GROUP BY 1
 |• tpv_pagarme |`FLOAT` |Soma do tpv cartão **pagarme smb, lacc, ka e pp**|
 
 #### :bulb: [Consolidação Budget 2024](https://github.com/stone-payments/payments-analytics/blob/main/pay-gestao-negocio-analytics-queries/budget/budget_2024.sql)
+
+### Índice Payments Analytics - Produtos x Indicadores 
+
+- Link Stone:
+  
+|**KPI**|**Descrição**|**Dimensões**|
+|-------|-------------|-------------|
+
+
+- Boleto:
+  
+|**KPI**|**Descrição**|**Dimensões**|
+|-------|-------------|-------------|
+|[active_accounts](https://github.com/stone-payments/payments-analytics/blob/main/pay-gestao-negocio-analytics-queries/boleto/boleto_monthly_uf_document.sql)|Contagem das account_id cujos boletos emitidos na conta Stone foram liquidados e a soma desses boletos liquidados por mês foi maior que 0| • Mês: `reference_month` <br><br> • UF: `UF` <br><br> • Documento: `owner_document`|
+|[active_clients](https://github.com/stone-payments/payments-analytics/blob/main/pay-gestao-negocio-analytics-queries/boleto/boleto_monthly_uf_document.sql)|Contagem dos documentos cujos boletos emitidos na conta Stone foram liquidados e a soma desses boletos liquidados por mês foi maior que 0| • Mês: `reference_month` <br><br> • UF: `UF` <br><br> • Documento: `owner_document`|
+|[new_active_accounts](https://github.com/stone-payments/payments-analytics/blob/main/pay-gestao-negocio-analytics-queries/boleto/boleto_monthly_uf_document.sql)|Contagem das account_id com gmv>0 pela primeira vez|• Mês: `reference_month` <br><br> • UF: `UF` <br><br> • Documento: `owner_document`|
+|[churn_accounts](https://github.com/stone-payments/payments-analytics/blob/main/pay-gestao-negocio-analytics-queries/boleto/boleto_monthly_uf_document.sql)|Contagem das account_id com status churn |• Mês: `reference_month` <br><br> • UF: `UF` <br><br> • Documento: `owner_document`|
+|[migrated_accounts](https://github.com/stone-payments/payments-analytics/blob/main/pay-gestao-negocio-analytics-queries/boleto/boleto_monthly_uf_document.sql)|Contagem das account_id migrados |• Mês: `reference_month` <br><br> • UF: `UF` <br><br> • Documento: `owner_document`|
+|[reactivated_accounts](https://github.com/stone-payments/payments-analytics/blob/main/pay-gestao-negocio-analytics-queries/boleto/boleto_monthly_uf_document.sql)|Contagem das account_id reativados |• Mês: `reference_month` <br><br> • UF: `UF` <br><br> • Documento: `owner_document`|
+|[gmv](https://github.com/stone-payments/payments-analytics/blob/main/pay-gestao-negocio-analytics-queries/boleto/boleto_monthly_uf_document.sql)|Soma dos valores dos boletos emitidos na conta Stone que foram liquidadoss |• Mês: `reference_month` <br><br> • UF: `UF` <br><br> • Documento: `owner_document`|
+|[new_active_gmv](https://github.com/stone-payments/payments-analytics/blob/main/pay-gestao-negocio-analytics-queries/boleto/boleto_monthly_uf_document.sql)|GMV dos novos ativos |• Mês: `reference_month` <br><br> • UF: `UF` <br><br> • Documento: `owner_document`|
+|[churned_gmv](https://github.com/stone-payments/payments-analytics/blob/main/pay-gestao-negocio-analytics-queries/boleto/boleto_monthly_uf_document.sql)|GMV dos churn |• Mês: `reference_month` <br><br> • UF: `UF` <br><br> • Documento: `owner_document`|
+|[reactivated_gmv](https://github.com/stone-payments/payments-analytics/blob/main/pay-gestao-negocio-analytics-queries/boleto/boleto_monthly_uf_document.sql)|GMV dos reativados |• Mês: `reference_month` <br><br> • UF: `UF` <br><br> • Documento: `owner_document`|
+|[migrated_gmv](https://github.com/stone-payments/payments-analytics/blob/main/pay-gestao-negocio-analytics-queries/boleto/boleto_monthly_uf_document.sql)|GMV dos migrados |• Mês: `reference_month` <br><br> • UF: `UF` <br><br> • Documento: `owner_document`|
+|[transactions](https://github.com/stone-payments/payments-analytics/blob/main/pay-gestao-negocio-analytics-queries/boleto/boleto_monthly_uf_document.sql)|Contagem de boletos emitidos na conta Stone que foram liquidados|• Mês: `reference_month` <br><br> • UF: `UF` <br><br> • Documento: `owner_document`|
+|[gross_revenue](https://github.com/stone-payments/payments-analytics/blob/main/pay-gestao-negocio-analytics-queries/boleto/boleto_monthly_uf_document.sql)|Receita gerada pela cobrança de tarifa sobre boletos emitidos na conta Stone e liquidados|• Mês: `reference_month` <br><br> • UF: `UF` <br><br> • Documento: `owner_document`|
+|[net_revenue](https://github.com/stone-payments/payments-analytics/blob/main/pay-gestao-negocio-analytics-queries/boleto/boleto_monthly_uf_document.sql)|Gross value aplicado imposto|• Mês: `reference_month` <br><br> • UF: `UF` <br><br> • Documento: `owner_document`|
+
+
+
 
 ## :mailbox_with_mail: Contato
 
