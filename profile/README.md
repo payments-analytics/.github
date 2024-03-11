@@ -13,39 +13,19 @@ Este guia é focado em ilustrar como realizar consultas fundamentais e identific
 Scripts SQL que são executados diariamente para criar e atualizar as tabelas mais importantes do conjunto de dados payments_analytics
 
 #### Índice - Documentação Tabelas
-  - [Base Ativa](#base-ativa)
-  - [Boleto](#boleto)
-  - [DCC](#dcc)
   - [GMV](#gmv)
-  - [Link](#link)
-  - [Parcelamento](#parcelamento)
-  - [Pix Pos](#pix-pos)
-  - [Receita](#receita)
-  - [Smart Pos](#smart-pos)
-  - [Tap on Phone](#tap-on-phone)
+    - [Boleto](#boleto)
+    - [Link](#link)
   - [TPV](#tpv)
-  - [Whatsapp Pay](#whatsapp-pay)
-
-#### Base Ativa
-
-| Nome da Tabela                              | Horário de Atualização | Link para Query       | Descrição da Tabela   | Indicadores |
-|---------------------------------------------|------------------------|-----------------------|-----------------------|-------------|
-| pagarme_active_base_monthly_results         | 20:00                  | [Query](./consultas_agendadas/base_ativa/pagarme_active_base_monthly_results.sql) | Base ativa pagarme    | • Base Ativa  |
-| payments_active_base_monthly_results        | 21:00                  | [Query](./consultas_agendadas/base_ativa/payments_active_base_monthly_results.sql) | Atividade do Cliente todas as marcas (inativa) |  • Base Ativa  <br> • Churn <br> • Novos Ativos <br> • Reativados|
-| payments_active_base_monthly_results_v2     | 21:00                  | [Query](./consultas_agendadas/base_ativa/payments_active_base_monthly_results_v2.sql) | Atividade do Cliente todas as marcas  | • Base Ativa  <br> • Churn <br> • Novos Ativos <br> • Reativados |
-
-#### Boleto
-
-| Nome da Tabela                              | Horário de Atualização | Link para Query       | Descrição da Tabela   | Indicadores |
-|---------------------------------------------|------------------------|-----------------------|-----------------------|-------------|
-| boleto_monthly_results         | 21:00                  | [Query](./consultas_agendadas/boleto/boleto_monthly_results.sql) | Principais KPIs Boleto Stone| • transactions  <br> • issued boleto <br> • charged boleto <br> • gross revenue <br> • net revenue <br> • active clients e accounts <br> • issued active account <br> • settled active account <br> • revenue active account <br> • new active accounts e gmv <br> • churn accounts e gmv <br> • migrated accounts e gmv <br> • reactivated accounts e gmv |
-| boleto_monthly_results         | 21:00                  | [Query](./consultas_agendadas/boleto/boleto_monthly_results.sql) |Principais KPIs Boleto Stone por Tier| • transactions  <br> • issued boleto <br> • charged boleto <br> • gross revenue <br> • net revenue <br> • active clients e accounts <br> • issued active account <br> • settled active account <br> • revenue active account <br> • new active accounts e gmv <br> • churn accounts e gmv <br> • migrated accounts e gmv <br> • reactivated accounts e gmv |
-
-#### DCC
-
-| Nome da Tabela                              | Horário de Atualização | Link para Query       | Descrição da Tabela   | Indicadores |
-|---------------------------------------------|------------------------|-----------------------|-----------------------|-------------|
-| dcc_stone_monthly_results         | 21:16                  | [Query](./consultas_agendadas/dcc/dcc_stone_monthly_results.sql) | Resultado DCC Stone| • Contagem distinta de Clientes <br> • Receita estimada |
+    - [Parcelamento](#parcelamento)
+  - [Base Ativa](#base-ativa)
+  - [Receita](#receita)
+    - [DCC](#dcc)
+  - [Novos Produtos](#pix-pos)
+    - [Pix Pos](#pix-pos)
+    - [Smart Pos](#smart-pos)
+    - [Tap on Phone](#tap-on-phone)
+    - [Whatsapp Pay](#whatsapp-pay)
 
 #### GMV
 
@@ -53,6 +33,12 @@ Scripts SQL que são executados diariamente para criar e atualizar as tabelas ma
 |---------------------------------------------|------------------------|-----------------------|-----------------------|-------------|
 | payments_gmv_monthly_results         | 21:00                  | [Query](./consultas_agendadas/gmv/payments_gmv_monthly_results.sql) | Resultado do GMV referente aos principais produtos| • Boleto Stone <br> • Boleto PSP SMB e KA <br> • Boleto GTW SMB e KA <br> • TPV Pagarme SMB e KA <br> • Pix Pagarme SMB e KA  <br> • Gtw exStone Pagarme SMB	e Pagarme KA  <br> • TPV PP, Ton, Stone, Link Stone, Link Ton, Tap Ton e Total <br> • Pix Pagarme SMB e KA <br> • Pix POS Ton e Stone <br> • GMV Total <br> • Van_Stone|
 
+#### Boleto
+
+| Nome da Tabela                              | Horário de Atualização | Link para Query       | Descrição da Tabela   | Indicadores |
+|---------------------------------------------|------------------------|-----------------------|-----------------------|-------------|
+| boleto_monthly_results         | 21:00                  | [Query](./consultas_agendadas/boleto/boleto_monthly_results.sql) | Principais KPIs Boleto Stone| • transactions  <br> • issued boleto <br> • charged boleto <br> • gross revenue <br> • net revenue <br> • active clients e accounts <br> • issued active account <br> • settled active account <br> • revenue active account <br> • new active accounts e gmv <br> • churn accounts e gmv <br> • migrated accounts e gmv <br> • reactivated accounts e gmv |
+| boleto_monthly_results         | 21:00                  | [Query](./consultas_agendadas/boleto/boleto_monthly_results.sql) |Principais KPIs Boleto Stone por Tier| • transactions  <br> • issued boleto <br> • charged boleto <br> • gross revenue <br> • net revenue <br> • active clients e accounts <br> • issued active account <br> • settled active account <br> • revenue active account <br> • new active accounts e gmv <br> • churn accounts e gmv <br> • migrated accounts e gmv <br> • reactivated accounts e gmv |
 
 #### Link
 
@@ -64,20 +50,17 @@ Scripts SQL que são executados diariamente para criar e atualizar as tabelas ma
 | payment_link_ton_monthly_results         | 21:15                  | [Query](./consultas_agendadas/link/payment_link_ton_monthly_results.sql) | Resultado Link Ton| • Base Ativa  <br> • Churn <br> • Novos Ativos <br> • Reativados <br> • TPV Reativados  <br> • Clientes Migrados <br> • TPV Clientes Migrados <br> • TPV <br> • Transactions <br> • TPV antecipado <br> • dx <br> • Receita MDR <br> • Receita MDR Liquida <br> • Receita RAV Liquida <br> • Receita RAV  <br> • Receita Transacional <br> • Receita Líquida Transacional <br> • COF <br> • Receita Net COF
 | payment_link_ton_tiered_monthly_results         | 21:18                  | [Query](./consultas_agendadas/link/payment_link_ton_tiered_monthly_results.sql) | Resultado Link Ton por tier |• Base Ativa  <br> • Churn <br> • Novos Ativos <br> • Reativados <br> • TPV Reativados  <br> • Clientes Migrados <br> • TPV Clientes Migrados <br> • TPV <br> • Transactions <br> • TPV antecipado <br> • dx <br> • Receita MDR <br> • Receita MDR Liquida <br> • Receita RAV Liquida <br> • Receita RAV  <br> • Receita Transacional <br> • Receita Líquida Transacional <br> • COF <br> • Receita Net COF
 
+#### Tpv
+
+| Nome da Tabela                              | Horário de Atualização | Link para Query       | Descrição da Tabela   | Indicadores |
+|---------------------------------------------|------------------------|-----------------------|-----------------------|-------------|
+| payments_mtd_pmtd_pytd         | 22:00                  | [Query](./consultas_agendadas/tpv/payments_mtd_pmtd_pytd.sql) | Resultado do TPV - dia| • active clients <br> • new clients <br> • new clients tpv <br> • churn clients <br> • churned tpv <br> • reactivated clients <br> • reactivated tpv <br> • migrated clients <br> • migrated tpv <br> • tpv <br> • transactions <br> • tpv antecipado <br> • dx <br> • receita mdr <br> • receita liquida mdr <br> • receita rav <br> • receita liquida rav <br> • receita transacional <br> • receita liquida transacional <br> • cost of funding <br> • receita net cof <br> • receita liquida net cof|
+
 #### Parcelamento
 
 | Nome da Tabela                              | Horário de Atualização | Link para Query       | Descrição da Tabela   | Indicadores |
 |---------------------------------------------|------------------------|-----------------------|-----------------------|-------------|
 | parcelamento_stone         | 21:00                  | [Query](./consultas_agendadas/parcelamento/parcelamento_stone.sql) | Resultado do Tpv gerado por quantidade de parcelas (Stone)| • installment name <br> • tpv|
-
-#### Pix Pos
-
-| Nome da Tabela                              | Horário de Atualização | Link para Query       | Descrição da Tabela   | Indicadores |
-|---------------------------------------------|------------------------|-----------------------|-----------------------|-------------|
-| pix_pos_stone_monthly_results_v2         | 21:03                  | [Query](./consultas_agendadas/pix_pos/pix_pos_stone_monthly_results_v2.sql) | Resultado PIX POS Stone | • gmv <br> • transactions <br> • fee free gmv <br> • fee free transactions <br> • charged gmv <br> • charged transactions <br> • gross revenue <br> • net revenue <br> • active clients <br> • fee free active account <br> • new active accounts <br> • new active gmv <br> • churn accounts <br> • churned gmv <br> • migrated accounts <br> •  migrated gmv <br> • reactivated accounts <br> • reactivated gmv|
-| pix_pos_stone_tiered_monthly_results         | 21:30                  | [Query](./consultas_agendadas/pix_pos/pix_pos_stone_tiered_monthly_results.sql) |  Resultado PIX POS Stone por tier  )| • gmv <br> • transactions <br> • fee free gmv <br> • fee free transactions <br> • charged gmv <br> • charged transactions <br> • gross revenue <br> • net revenue <br> • active clients <br> • fee free active account <br> • new active accounts <br> • new active gmv <br> • churn accounts <br> • churned gmv <br> • migrated accounts <br> •  migrated gmv <br> • reactivated accounts <br> • reactivated gmv|
-| pix_pos_ton_monthly_results_v2         | 21:03                  | [Query](./consultas_agendadas/pix_pos/pix_pos_ton_monthly_results_v2.sql) | Resultado PIX POS Ton | • gmv <br> • transactions <br> • fee free gmv <br> • fee free transactions <br> • charged gmv <br> • charged transactions <br> • gross revenue <br> • net revenue <br> • active clients <br> • fee free active account <br> • new active accounts <br> • new active gmv <br> • churn accounts <br> • churned gmv <br> • migrated accounts <br> •  migrated gmv <br> • reactivated accounts <br> • reactivated gmv|
-| pix_pos_ton_tiered_monthly_results         | 21:12                  | [Query](./consultas_agendadas/pix_pos/pix_pos_ton_tiered_monthly_results.sql) |  Resultado PIX POS Ton por tier|• gmv <br> • transactions <br> • fee free gmv <br> • fee free transactions <br> • charged gmv <br> • charged transactions <br> • gross revenue <br> • net revenue <br> • active clients <br> • fee free active account <br> • new active accounts <br> • new active gmv <br> • churn accounts <br> • churned gmv <br> • migrated accounts <br> •  migrated gmv <br> • reactivated accounts <br> • reactivated gmv|
 
 #### Receita
 
@@ -88,7 +71,33 @@ Scripts SQL que são executados diariamente para criar e atualizar as tabelas ma
 | payments_net_cof_revenue         | 02:00                  | [Query](./consultas_agendadas/receita/payments_net_cof_revenue.sql) | Receita net cof pagarme por mês  |• payments net cof revenue <br> • stone net cof revenue <br> • stone net cof revenue ex adesao <br> • stone adesao net revenue <br> • stone pix pos revenue <br> • stone boleto banking revenue <br> • partner program net cof revenue <br> • partner program net cof revenue ex adesao <br> • partner program adesao net revenue <br> • ton net cof revenue <br> • ton net cof revenue ex adesao tapton floating <br> • ton adesao net revenue <br> • ton pix pos revenue <br> • ton tap on phone revenue <br> • pagarme smb net cof revenue <br> • pagarme grandes contas net cof revenue
 | payments_net_cof_revenue_daily_results         | 21:00                  | [Query](./consultas_agendadas/receita/payments_net_cof_revenue_daily_results.sql) | Receita net cof payments por dia| • date ref <br> • payments net cof revenue with adjustment <br> • stone net cof revenue <br> • ton net cof revenue <br> • pagarme net cof revenue with adjustment |
 | payments_net_cof_revenue_monthly_results         | 00:10                  | [Query](./consultas_agendadas/receita/payments_net_cof_revenue_monthly_results.sql) | Principais receitas payments por mês| • payments net cof revenue with adjustment <br> • payments net cof revenue <br> • stone net cof revenue <br> • stone net cof revenue ex adesao <br> • stone mdr net revenue <br> • stone rav net revenue <br> • stone cof <br> • stone aluguel net revenue <br> • stone adesao net revenue <br> • stone pix pos revenue <br> • stone boleto banking revenue <br> • ton net cof revenue <br> • ton net cof revenue ex adesao tapton floating <br> • ton mdr net revenue <br> • ton rav net revenue
-| temp_payments_revenue_monthly_results_edit_pagarme         | 21:00                  | [Query](./consultas_agendadas/receita/temp_payments_revenue_monthly_results_edit_pagarme.sql) | Temp - Principais receitas (Pagarme)| • • stone net cof revenue <br> • stone net cof revenue ex adesao <br> • stone mdr net revenue <br> • stone rav net revenue <br> • stone cof <br> • stone aluguel net revenue <br> • stone adesao net revenue <br> • stone pix pos revenue <br> • stone boleto banking revenue <br> • ton net cof revenue <br> • ton net cof revenue ex adesao tapton floating <br> • ton mdr net revenue <br> • ton rav net revenue <br> • ton cof <br> • ton adesao net revenue <br> • ton pix pos revenue <br> • ton tap on phone revenue <br> • pagarme net cof revenue <br> • partner program net cof revenue <br> • partner program net cof revenue ex adesao <br> • partner program mdr net revenue <br> • partner program rav net revenue <br> • partner program aluguel net revenue <br> • partner program adesao net revenue <br> • pagarme smb net cof revenue <br> • pagarme smb receita liquida trx <br> • pagarme smb receita de aluguel <br> • pagarme smb receita de adesao <br> • pagarme smb outras receitas <br> • pagarme grandes contas receita net cof <br> • pagarme grandes contas receita liquida trx <br> • pagarme grandes contas receita de aluguel <br> • pagarme grandes contas receita de adesao <br> • pagarme grandes contas outras receitas
+| temp_payments_revenue_monthly_results_edit_pagarme         | 21:00                  | [Query](./consultas_agendadas/receita/temp_payments_revenue_monthly_results_edit_pagarme.sql) | Temp - Principais receitas (Pagarme)| • • stone net cof revenue <br> • stone net cof revenue ex adesao <br> • stone mdr net revenue <br> • stone rav net revenue <br> • stone cof <br> • stone aluguel net revenue <br> • stone adesao net revenue <br> • stone pix pos revenue <br> • stone boleto banking revenue <br> • ton net cof revenue <br> • ton net cof revenue ex adesao tapton floating <br> • ton mdr net revenue <br> • ton rav net revenue <br> • ton cof <br> • ton adesao net revenue <br> • ton pix pos revenue <br> • ton tap on phone revenue <br> • pagarme net cof revenue <br> • partner program net cof revenue <br> • partner program net cof revenue ex adesao <br> • partner program mdr net revenue <br> • partner program rav net revenue <br> • partner program aluguel net revenue <br> • partner program adesao net revenue <br> • pagarme smb net cof revenue <br> • pagarme smb receita liquida trx <br> • pagarme smb receita de aluguel <br> • pagarme smb receita de adesao <br> • pagarme smb outras receitas <br> • pagarme grandes contas receita net cof <br> • pagarme grandes contas receita liquida trx <br> • pagarme grandes contas receita de aluguel <br> • pagarme grandes contas receita de adesao <br> • pagarme grandes contas outras receitas|
+
+
+#### DCC
+
+| Nome da Tabela                              | Horário de Atualização | Link para Query       | Descrição da Tabela   | Indicadores |
+|---------------------------------------------|------------------------|-----------------------|-----------------------|-------------|
+| dcc_stone_monthly_results         | 21:16                  | [Query](./consultas_agendadas/dcc/dcc_stone_monthly_results.sql) | Resultado DCC Stone| • Contagem distinta de Clientes <br> • Receita estimada |
+
+
+#### Base Ativa
+
+| Nome da Tabela                              | Horário de Atualização | Link para Query       | Descrição da Tabela   | Indicadores |
+|---------------------------------------------|------------------------|-----------------------|-----------------------|-------------|
+| pagarme_active_base_monthly_results         | 20:00                  | [Query](./consultas_agendadas/base_ativa/pagarme_active_base_monthly_results.sql) | Base ativa pagarme    | • Base Ativa  |
+| payments_active_base_monthly_results        | 21:00                  | [Query](./consultas_agendadas/base_ativa/payments_active_base_monthly_results.sql) | Atividade do Cliente todas as marcas (inativa) |  • Base Ativa  <br> • Churn <br> • Novos Ativos <br> • Reativados|
+| payments_active_base_monthly_results_v2     | 21:00                  | [Query](./consultas_agendadas/base_ativa/payments_active_base_monthly_results_v2.sql) | Atividade do Cliente todas as marcas  | • Base Ativa  <br> • Churn <br> • Novos Ativos <br> • Reativados |
+
+
+#### Pix Pos
+
+| Nome da Tabela                              | Horário de Atualização | Link para Query       | Descrição da Tabela   | Indicadores |
+|---------------------------------------------|------------------------|-----------------------|-----------------------|-------------|
+| pix_pos_stone_monthly_results_v2         | 21:03                  | [Query](./consultas_agendadas/pix_pos/pix_pos_stone_monthly_results_v2.sql) | Resultado PIX POS Stone | • gmv <br> • transactions <br> • fee free gmv <br> • fee free transactions <br> • charged gmv <br> • charged transactions <br> • gross revenue <br> • net revenue <br> • active clients <br> • fee free active account <br> • new active accounts <br> • new active gmv <br> • churn accounts <br> • churned gmv <br> • migrated accounts <br> •  migrated gmv <br> • reactivated accounts <br> • reactivated gmv|
+| pix_pos_stone_tiered_monthly_results         | 21:30                  | [Query](./consultas_agendadas/pix_pos/pix_pos_stone_tiered_monthly_results.sql) |  Resultado PIX POS Stone por tier  )| • gmv <br> • transactions <br> • fee free gmv <br> • fee free transactions <br> • charged gmv <br> • charged transactions <br> • gross revenue <br> • net revenue <br> • active clients <br> • fee free active account <br> • new active accounts <br> • new active gmv <br> • churn accounts <br> • churned gmv <br> • migrated accounts <br> •  migrated gmv <br> • reactivated accounts <br> • reactivated gmv|
+| pix_pos_ton_monthly_results_v2         | 21:03                  | [Query](./consultas_agendadas/pix_pos/pix_pos_ton_monthly_results_v2.sql) | Resultado PIX POS Ton | • gmv <br> • transactions <br> • fee free gmv <br> • fee free transactions <br> • charged gmv <br> • charged transactions <br> • gross revenue <br> • net revenue <br> • active clients <br> • fee free active account <br> • new active accounts <br> • new active gmv <br> • churn accounts <br> • churned gmv <br> • migrated accounts <br> •  migrated gmv <br> • reactivated accounts <br> • reactivated gmv|
+| pix_pos_ton_tiered_monthly_results         | 21:12                  | [Query](./consultas_agendadas/pix_pos/pix_pos_ton_tiered_monthly_results.sql) |  Resultado PIX POS Ton por tier|• gmv <br> • transactions <br> • fee free gmv <br> • fee free transactions <br> • charged gmv <br> • charged transactions <br> • gross revenue <br> • net revenue <br> • active clients <br> • fee free active account <br> • new active accounts <br> • new active gmv <br> • churn accounts <br> • churned gmv <br> • migrated accounts <br> •  migrated gmv <br> • reactivated accounts <br> • reactivated gmv|
 
 
 #### Smart Pos
@@ -105,12 +114,6 @@ Scripts SQL que são executados diariamente para criar e atualizar as tabelas ma
 | tap_on_phone_ton_monthly_results       | 21:00                  | [Query](./consultas_agendadas/tap_phone/tap_on_phone_ton_monthly_results.sql) | Resultado Tap on Phone|• active clients <br> • new clients <br> • new clients tpv <br> • churn clients <br> • churned tpv <br> • reactivated clients <br> • reactivated tpv <br> • migrated clients <br> • migrated tpv <br> • tpv <br> • transactions <br> • tpv antecipado <br> • dx <br> • receita mdr <br> • receita liquida mdr <br> • receita rav <br> • receita liquida rav <br> • receita transacional <br> • receita liquida transacional <br> • cost of funding <br> • receita net cof <br> • receita liquida net cof|
 | tap_on_phone_ton_tiered_monthly_results_v2        | 21:15                  | [Query](./consultas_agendadas/tap_phone/tap_on_phone_ton_tiered_monthly_results.sql) | Resultado Tap on Phone por tier| • tier tpv <br> • client group <br> • tap cohort <br> • ton cohort <br> • transaction type <br> • active clients <br> • new active clients <br> • churn clients <br> • reactivated clients <br> • new active clients tpv <br> • churned tpv <br> • reactivated tpv <br> • tpv <br> • transactions <br> • prepaid tpv <br> • dx calculado <br> • dx <br> • cost of funding <br> • net mdr revenue <br> • prepayment revenue <br> • transactional revenue <br> • net cof revenue
 
-
-#### Tpv
-
-| Nome da Tabela                              | Horário de Atualização | Link para Query       | Descrição da Tabela   | Indicadores |
-|---------------------------------------------|------------------------|-----------------------|-----------------------|-------------|
-| payments_mtd_pmtd_pytd         | 22:00                  | [Query](./consultas_agendadas/tpv/payments_mtd_pmtd_pytd.sql) | Resultado do TPV - dia| • active clients <br> • new clients <br> • new clients tpv <br> • churn clients <br> • churned tpv <br> • reactivated clients <br> • reactivated tpv <br> • migrated clients <br> • migrated tpv <br> • tpv <br> • transactions <br> • tpv antecipado <br> • dx <br> • receita mdr <br> • receita liquida mdr <br> • receita rav <br> • receita liquida rav <br> • receita transacional <br> • receita liquida transacional <br> • cost of funding <br> • receita net cof <br> • receita liquida net cof|
 
 #### Whatsapp Pay
 
