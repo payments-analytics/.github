@@ -14,34 +14,23 @@ Scripts SQL que são executados diariamente para criar e atualizar as tabelas ma
 
 #### Índice - Documentação Tabelas
   - [GMV](#gmv)
-    - [Link](#link)
   - [TPV](#tpv)
     - [Parcelamento](#parcelamento)
   - [Base Ativa](#base-ativa)
   - [Receita](#receita)
-    - [DCC](#dcc)
   - [Novos Produtos](#pix-pos)
     - [Pix Pos](#pix-pos)
     - [Boleto](#boleto)
     - [Smart Pos](#smart-pos)
     - [Tap on Phone](#tap-on-phone)
     - [Whatsapp Pay](#whatsapp-pay)
-
+    - [DCC](#dcc)
+    - [Link](#link)
 #### GMV
 
 | Nome da Tabela                              | Horário de Atualização | Link para Query       | Descrição da Tabela   | Indicadores |
 |---------------------------------------------|------------------------|-----------------------|-----------------------|-------------|
 | payments_gmv_monthly_results         | 21:00                  | [Query](./consultas_agendadas/gmv/payments_gmv_monthly_results.sql) | Resultado do GMV referente aos principais produtos| • Boleto Stone <br> • Boleto PSP SMB e KA <br> • Boleto GTW SMB e KA <br> • TPV Pagarme SMB e KA <br> • Pix Pagarme SMB e KA  <br> • Gtw exStone Pagarme SMB	e Pagarme KA  <br> • TPV PP, Ton, Stone, Link Stone, Link Ton, Tap Ton e Total <br> • Pix Pagarme SMB e KA <br> • Pix POS Ton e Stone <br> • GMV Total <br> • Van_Stone|
-
-#### Link
-
-| Nome da Tabela                              | Horário de Atualização | Link para Query       | Descrição da Tabela   | Indicadores |
-|---------------------------------------------|------------------------|-----------------------|-----------------------|-------------|
-| dim_payment_link_client         | 20:30                  | [Query](./consultas_agendadas/link/dim_payment_link_client.sql) | Informações dos clientes link| - |
-| payment_link_stone_monthly_results         | 21:10                  | [Query](./consultas_agendadas/link/payment_link_stone_monthly_results.sql) | Resultado Link Stone | • clientes ativos <br> • warranty rate clients • active_clients <br> • novos clientes  <br> • churn <br> • reativados  <br> • Dias até ativação <br> • tpv <br> • churned tpv <br> • tpv reativado <br> • receita netmdr <br> • receita netmdr liquida  <br> • prepayment active clients <br> • receita bruta rav <br> • receita liquida rav <br> • receita liquida transacional <br> • tpv medio por cliente  <br> • receita net cof medio por cliente |
-| payment_link_stone_tiered_monthly_results         | 21:10                  | [Query](./consultas_agendadas/link/payment_link_stone_tiered_monthly_results.sql) |Resultado Link Stone por tier| • clientes ativos <br> • warranty rate clients • Base Ativa  <br> • Churn <br> • Novos Ativos <br> • Reativados <br> • Dias até ativação <br> • tpv <br> • churned tpv <br> • tpv reativado <br> • receita netmdr <br> • receita netmdr liquida  <br> • prepayment active clients <br> • receita bruta rav <br> • receita liquida rav <br> • receita liquida transacional <br> • tpv medio por cliente  <br> • receita net cof medio por cliente |
-| payment_link_ton_monthly_results         | 21:15                  | [Query](./consultas_agendadas/link/payment_link_ton_monthly_results.sql) | Resultado Link Ton| • Base Ativa  <br> • Churn <br> • Novos Ativos <br> • Reativados <br> • TPV Reativados  <br> • Clientes Migrados <br> • TPV Clientes Migrados <br> • TPV <br> • Transactions <br> • TPV antecipado <br> • dx <br> • Receita MDR <br> • Receita MDR Liquida <br> • Receita RAV Liquida <br> • Receita RAV  <br> • Receita Transacional <br> • Receita Líquida Transacional <br> • COF <br> • Receita Net COF
-| payment_link_ton_tiered_monthly_results         | 21:18                  | [Query](./consultas_agendadas/link/payment_link_ton_tiered_monthly_results.sql) | Resultado Link Ton por tier |• Base Ativa  <br> • Churn <br> • Novos Ativos <br> • Reativados <br> • TPV Reativados  <br> • Clientes Migrados <br> • TPV Clientes Migrados <br> • TPV <br> • Transactions <br> • TPV antecipado <br> • dx <br> • Receita MDR <br> • Receita MDR Liquida <br> • Receita RAV Liquida <br> • Receita RAV  <br> • Receita Transacional <br> • Receita Líquida Transacional <br> • COF <br> • Receita Net COF
 
 #### Tpv
 
@@ -65,14 +54,6 @@ Scripts SQL que são executados diariamente para criar e atualizar as tabelas ma
 | payments_net_cof_revenue_daily_results         | 21:00                  | [Query](./consultas_agendadas/receita/payments_net_cof_revenue_daily_results.sql) | Receita net cof payments por dia| • date ref <br> • payments net cof revenue with adjustment <br> • stone net cof revenue <br> • ton net cof revenue <br> • pagarme net cof revenue with adjustment |
 | payments_net_cof_revenue_monthly_results         | 00:10                  | [Query](./consultas_agendadas/receita/payments_net_cof_revenue_monthly_results.sql) | Principais receitas payments por mês| • payments net cof revenue with adjustment <br> • payments net cof revenue <br> • stone net cof revenue <br> • stone net cof revenue ex adesao <br> • stone mdr net revenue <br> • stone rav net revenue <br> • stone cof <br> • stone aluguel net revenue <br> • stone adesao net revenue <br> • stone pix pos revenue <br> • stone boleto banking revenue <br> • ton net cof revenue <br> • ton net cof revenue ex adesao tapton floating <br> • ton mdr net revenue <br> • ton rav net revenue
 | temp_payments_revenue_monthly_results_edit_pagarme         | 21:00                  | [Query](./consultas_agendadas/receita/temp_payments_revenue_monthly_results_edit_pagarme.sql) | Temp - Principais receitas (Pagarme)| • • stone net cof revenue <br> • stone net cof revenue ex adesao <br> • stone mdr net revenue <br> • stone rav net revenue <br> • stone cof <br> • stone aluguel net revenue <br> • stone adesao net revenue <br> • stone pix pos revenue <br> • stone boleto banking revenue <br> • ton net cof revenue <br> • ton net cof revenue ex adesao tapton floating <br> • ton mdr net revenue <br> • ton rav net revenue <br> • ton cof <br> • ton adesao net revenue <br> • ton pix pos revenue <br> • ton tap on phone revenue <br> • pagarme net cof revenue <br> • partner program net cof revenue <br> • partner program net cof revenue ex adesao <br> • partner program mdr net revenue <br> • partner program rav net revenue <br> • partner program aluguel net revenue <br> • partner program adesao net revenue <br> • pagarme smb net cof revenue <br> • pagarme smb receita liquida trx <br> • pagarme smb receita de aluguel <br> • pagarme smb receita de adesao <br> • pagarme smb outras receitas <br> • pagarme grandes contas receita net cof <br> • pagarme grandes contas receita liquida trx <br> • pagarme grandes contas receita de aluguel <br> • pagarme grandes contas receita de adesao <br> • pagarme grandes contas outras receitas|
-
-
-#### DCC
-
-| Nome da Tabela                              | Horário de Atualização | Link para Query       | Descrição da Tabela   | Indicadores |
-|---------------------------------------------|------------------------|-----------------------|-----------------------|-------------|
-| dcc_stone_monthly_results         | 21:16                  | [Query](./consultas_agendadas/dcc/dcc_stone_monthly_results.sql) | Resultado DCC Stone| • Contagem distinta de Clientes <br> • Receita estimada |
-
 
 #### Base Ativa
 
@@ -128,6 +109,21 @@ Scripts SQL que são executados diariamente para criar e atualizar as tabelas ma
 | dim_client_liquidacao_diaria         | 20:00                  | [Query](./consultas_agendadas/liquidacao_diaria/dim_client_liquidacao.sql) | Informações por documento| • CustomerDocument <br> • ClientKey <br> • PrepaymentType <br> • acquirer_activation_cohort <br> • acquirer_activation_date <br> • config_cohort <br> • config_date <br> • activation_cohort <br> • activation_date|
 | temp_d1_d0_stone_tiered_monthly_results         | 20:00                  | [Query](./consultas_agendadas/liquidacao_diaria/temp_d1_d0_stone_tiered_monthly_results.sql) | Resultado dos principais KPIS| • tier_tpv <br> • acquirer_cohort <br> • activation_cohort <br> • request_channel <br> • prepayment_type <br> • active_clients <br> • new_active_clients <br> • churn_clients <br> • reactivated_clients <br> • migrated_clients <br> • new_active_clients_tpv <br> • churned_tpv <br> • reactivated_tpv <br> • migrated_tpv <br> • tpv <br> • transactions <br> • charged_tpv <br> • fee_free_tpv <br> • estimated_cost_tpv <br> • estimated_additional_cof <br> • estimated_net_revenue <br> • estimated_additional_net_cof_revenue|
 
+#### DCC
+
+| Nome da Tabela                              | Horário de Atualização | Link para Query       | Descrição da Tabela   | Indicadores |
+|---------------------------------------------|------------------------|-----------------------|-----------------------|-------------|
+| dcc_stone_monthly_results         | 21:16                  | [Query](./consultas_agendadas/dcc/dcc_stone_monthly_results.sql) | Resultado DCC Stone| • Contagem distinta de Clientes <br> • Receita estimada |
+
+#### Link
+
+| Nome da Tabela                              | Horário de Atualização | Link para Query       | Descrição da Tabela   | Indicadores |
+|---------------------------------------------|------------------------|-----------------------|-----------------------|-------------|
+| dim_payment_link_client         | 20:30                  | [Query](./consultas_agendadas/link/dim_payment_link_client.sql) | Informações dos clientes link| - |
+| payment_link_stone_monthly_results         | 21:10                  | [Query](./consultas_agendadas/link/payment_link_stone_monthly_results.sql) | Resultado Link Stone | • clientes ativos <br> • warranty rate clients • active_clients <br> • novos clientes  <br> • churn <br> • reativados  <br> • Dias até ativação <br> • tpv <br> • churned tpv <br> • tpv reativado <br> • receita netmdr <br> • receita netmdr liquida  <br> • prepayment active clients <br> • receita bruta rav <br> • receita liquida rav <br> • receita liquida transacional <br> • tpv medio por cliente  <br> • receita net cof medio por cliente |
+| payment_link_stone_tiered_monthly_results         | 21:10                  | [Query](./consultas_agendadas/link/payment_link_stone_tiered_monthly_results.sql) |Resultado Link Stone por tier| • clientes ativos <br> • warranty rate clients • Base Ativa  <br> • Churn <br> • Novos Ativos <br> • Reativados <br> • Dias até ativação <br> • tpv <br> • churned tpv <br> • tpv reativado <br> • receita netmdr <br> • receita netmdr liquida  <br> • prepayment active clients <br> • receita bruta rav <br> • receita liquida rav <br> • receita liquida transacional <br> • tpv medio por cliente  <br> • receita net cof medio por cliente |
+| payment_link_ton_monthly_results         | 21:15                  | [Query](./consultas_agendadas/link/payment_link_ton_monthly_results.sql) | Resultado Link Ton| • Base Ativa  <br> • Churn <br> • Novos Ativos <br> • Reativados <br> • TPV Reativados  <br> • Clientes Migrados <br> • TPV Clientes Migrados <br> • TPV <br> • Transactions <br> • TPV antecipado <br> • dx <br> • Receita MDR <br> • Receita MDR Liquida <br> • Receita RAV Liquida <br> • Receita RAV  <br> • Receita Transacional <br> • Receita Líquida Transacional <br> • COF <br> • Receita Net COF
+| payment_link_ton_tiered_monthly_results         | 21:18                  | [Query](./consultas_agendadas/link/payment_link_ton_tiered_monthly_results.sql) | Resultado Link Ton por tier |• Base Ativa  <br> • Churn <br> • Novos Ativos <br> • Reativados <br> • TPV Reativados  <br> • Clientes Migrados <br> • TPV Clientes Migrados <br> • TPV <br> • Transactions <br> • TPV antecipado <br> • dx <br> • Receita MDR <br> • Receita MDR Liquida <br> • Receita RAV Liquida <br> • Receita RAV  <br> • Receita Transacional <br> • Receita Líquida Transacional <br> • COF <br> • Receita Net COF
 
 #### 1.RAV
 
