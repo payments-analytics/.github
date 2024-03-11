@@ -14,7 +14,6 @@ Scripts SQL que são executados diariamente para criar e atualizar as tabelas ma
 
 #### Índice - Documentação Tabelas
   - [GMV](#gmv)
-    - [Boleto](#boleto)
     - [Link](#link)
   - [TPV](#tpv)
     - [Parcelamento](#parcelamento)
@@ -23,6 +22,7 @@ Scripts SQL que são executados diariamente para criar e atualizar as tabelas ma
     - [DCC](#dcc)
   - [Novos Produtos](#pix-pos)
     - [Pix Pos](#pix-pos)
+    - [Boleto](#boleto)
     - [Smart Pos](#smart-pos)
     - [Tap on Phone](#tap-on-phone)
     - [Whatsapp Pay](#whatsapp-pay)
@@ -32,13 +32,6 @@ Scripts SQL que são executados diariamente para criar e atualizar as tabelas ma
 | Nome da Tabela                              | Horário de Atualização | Link para Query       | Descrição da Tabela   | Indicadores |
 |---------------------------------------------|------------------------|-----------------------|-----------------------|-------------|
 | payments_gmv_monthly_results         | 21:00                  | [Query](./consultas_agendadas/gmv/payments_gmv_monthly_results.sql) | Resultado do GMV referente aos principais produtos| • Boleto Stone <br> • Boleto PSP SMB e KA <br> • Boleto GTW SMB e KA <br> • TPV Pagarme SMB e KA <br> • Pix Pagarme SMB e KA  <br> • Gtw exStone Pagarme SMB	e Pagarme KA  <br> • TPV PP, Ton, Stone, Link Stone, Link Ton, Tap Ton e Total <br> • Pix Pagarme SMB e KA <br> • Pix POS Ton e Stone <br> • GMV Total <br> • Van_Stone|
-
-#### Boleto
-
-| Nome da Tabela                              | Horário de Atualização | Link para Query       | Descrição da Tabela   | Indicadores |
-|---------------------------------------------|------------------------|-----------------------|-----------------------|-------------|
-| boleto_monthly_results         | 21:00                  | [Query](./consultas_agendadas/boleto/boleto_monthly_results.sql) | Principais KPIs Boleto Stone| • transactions  <br> • issued boleto <br> • charged boleto <br> • gross revenue <br> • net revenue <br> • active clients e accounts <br> • issued active account <br> • settled active account <br> • revenue active account <br> • new active accounts e gmv <br> • churn accounts e gmv <br> • migrated accounts e gmv <br> • reactivated accounts e gmv |
-| boleto_monthly_results         | 21:00                  | [Query](./consultas_agendadas/boleto/boleto_monthly_results.sql) |Principais KPIs Boleto Stone por Tier| • transactions  <br> • issued boleto <br> • charged boleto <br> • gross revenue <br> • net revenue <br> • active clients e accounts <br> • issued active account <br> • settled active account <br> • revenue active account <br> • new active accounts e gmv <br> • churn accounts e gmv <br> • migrated accounts e gmv <br> • reactivated accounts e gmv |
 
 #### Link
 
@@ -99,6 +92,12 @@ Scripts SQL que são executados diariamente para criar e atualizar as tabelas ma
 | pix_pos_ton_monthly_results_v2         | 21:03                  | [Query](./consultas_agendadas/pix_pos/pix_pos_ton_monthly_results_v2.sql) | Resultado PIX POS Ton | • gmv <br> • transactions <br> • fee free gmv <br> • fee free transactions <br> • charged gmv <br> • charged transactions <br> • gross revenue <br> • net revenue <br> • active clients <br> • fee free active account <br> • new active accounts <br> • new active gmv <br> • churn accounts <br> • churned gmv <br> • migrated accounts <br> •  migrated gmv <br> • reactivated accounts <br> • reactivated gmv|
 | pix_pos_ton_tiered_monthly_results         | 21:12                  | [Query](./consultas_agendadas/pix_pos/pix_pos_ton_tiered_monthly_results.sql) |  Resultado PIX POS Ton por tier|• gmv <br> • transactions <br> • fee free gmv <br> • fee free transactions <br> • charged gmv <br> • charged transactions <br> • gross revenue <br> • net revenue <br> • active clients <br> • fee free active account <br> • new active accounts <br> • new active gmv <br> • churn accounts <br> • churned gmv <br> • migrated accounts <br> •  migrated gmv <br> • reactivated accounts <br> • reactivated gmv|
 
+#### Boleto
+
+| Nome da Tabela                              | Horário de Atualização | Link para Query       | Descrição da Tabela   | Indicadores |
+|---------------------------------------------|------------------------|-----------------------|-----------------------|-------------|
+| boleto_monthly_results         | 21:00                  | [Query](./consultas_agendadas/boleto/boleto_monthly_results.sql) | Principais KPIs Boleto Stone| • transactions  <br> • issued boleto <br> • charged boleto <br> • gross revenue <br> • net revenue <br> • active clients e accounts <br> • issued active account <br> • settled active account <br> • revenue active account <br> • new active accounts e gmv <br> • churn accounts e gmv <br> • migrated accounts e gmv <br> • reactivated accounts e gmv |
+| boleto_monthly_results         | 21:00                  | [Query](./consultas_agendadas/boleto/boleto_monthly_results.sql) |Principais KPIs Boleto Stone por Tier| • transactions  <br> • issued boleto <br> • charged boleto <br> • gross revenue <br> • net revenue <br> • active clients e accounts <br> • issued active account <br> • settled active account <br> • revenue active account <br> • new active accounts e gmv <br> • churn accounts e gmv <br> • migrated accounts e gmv <br> • reactivated accounts e gmv |
 
 #### Smart Pos
 
