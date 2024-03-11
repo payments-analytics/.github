@@ -12,7 +12,7 @@ Este guia é focado em ilustrar como realizar consultas fundamentais e identific
 ### Dataset Payments Analytics 
 Scripts SQL que são executados diariamente para criar e atualizar as tabelas mais importantes do conjunto de dados payments_analytics
 
-#### Índice
+#### Índice - Documentação Tabelas
   - [Base Ativa](#base-ativa)
   - [Boleto](#boleto)
   - [DCC](#dcc)
