@@ -6,17 +6,6 @@ A missão do nosso repositório é centralizar todas as queries de análise de r
 
 ![image](https://github.com/payments-analytics/.github/assets/154369193/1bac58eb-51c7-41e3-9d67-041031b6fdd0)
 
-## :rocket: Nossos Projetos
-
-- **[pay-gestao-negocio-analytics-queries](https://github.com/payments-analytics/pay-gestao-negocio-analytics-queries)**:
-  - :bar_chart: Queries rotineiras para consultas no BigQuery, Metabase e Redshift.
-- **[pay-gestao-negocio-looker-queries](https://github.com/payments-analytics/pay-gestao-negocio-looker-queries)**
-  - :chart_with_upwards_trend: Queries para dashboards do Looker Studio.
-- **[pay-gestao-negocio-scheduled-queries](https://github.com/payments-analytics/pay-gestao-negocio-scheduled-queries)**
-  - 🗓 Queries agendadas do Dataset `payments_analytics` no BigQuery.
-- **[pay-gestao-scripts](https://github.com/payments-analytics/pay-gestao-scripts)**
-  - :scroll: Scripts para o dia a dia do time.
-
 ## :compass: Guia de Análise  
 Este guia é focado em ilustrar como realizar consultas fundamentais e identificar as tabelas chave no dataset de pagamentos para uma análise dos produtos. Vamos explorar as principais tabelas e como utilizá-las em consultas estratégicas para obter insights.
 
@@ -36,7 +25,6 @@ Scripts SQL que são executados diariamente para criar e atualizar as tabelas ma
   - [Tap on Phone](#tap-on-phone)
   - [TPV](#tpv)
   - [Whatsapp Pay](#whatsapp-pay)
-  - [Budget 2024](#budget-2024)
 
 #### Base Ativa
 
